@@ -1,0 +1,23 @@
+{
+  "name": "ensue-memory-network",
+  "description": "Persistent memory layer for AI agents via Ensue Memory Network. Store, search, and share memories with semantic vector search capabilities.",
+  "owner": {
+    "name": "Ensue",
+    "email": "founders@ensue.dev"
+  },
+  "metadata": {
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "ensue-memory",
+      "description": "Persistent memory layer for AI agents. Store, recall, search, and share memories with semantic search. Triggers on 'remember', 'recall', 'search memories', 'update memory', 'share', 'subscribe', 'permissions'.",
+      "source": "./",
+      "category": "productivity",
+      "homepage": "https://ensue.dev",
+      "skills": [
+        "./skills/ensue-memory"
+      ]
+    }
+  ]
+}
