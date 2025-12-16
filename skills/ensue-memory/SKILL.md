@@ -7,26 +7,20 @@ description: Persistent memory layer for AI agents via Ensue Memory Network API.
 
 Dynamic memory service accessed via curl for fast CLI execution.
 
-## Initialization (REQUIRED FIRST)
+## Execution Order (MUST FOLLOW)
 
-**Before doing anything else**, check for API key:
+**Step 1: Check for API key**
 
 ```bash
 claude mcp get memory-network-ensue
 ```
 
-If this returns a Bearer token in the headers, extract it and proceed.
-
-If not configured, notify the user:
+If no Bearer token found, stop and notify user:
 > "Ensue Memory Network is not configured. To set up:
 > 1. Get an API key from https://www.ensue-network.ai/dashboard
 > 2. Run: `claude mcp add memory-network-ensue https://api.ensue-network.ai/ --header \"Authorization: Bearer YOUR_API_KEY\"`"
 
-**Do not proceed until API key is available.**
-
-## Tool Discovery
-
-After confirming API key, discover available tools:
+**Step 2: List available tools (REQUIRED before any tool call)**
 
 ```bash
 curl -X POST https://api.ensue-network.ai/ \
@@ -35,11 +29,9 @@ curl -X POST https://api.ensue-network.ai/ \
   -d '{"jsonrpc":"2.0","method":"tools/list","id":1}'
 ```
 
-This returns current tool names, descriptions, and input schemas. **Always check schemas before calling** - they may change.
+This returns current tool names, descriptions, and input schemas. **Never skip this step** - schemas may change.
 
-## Tool Invocation
-
-Call tools via JSON-RPC:
+**Step 3: Call the appropriate tool**
 
 ```bash
 curl -X POST https://api.ensue-network.ai/ \
@@ -47,6 +39,8 @@ curl -X POST https://api.ensue-network.ai/ \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"<tool_name>","arguments":{<args>}},"id":1}'
 ```
+
+Use the schema from Step 2 to construct the correct arguments.
 
 ## Intent Mapping
 
