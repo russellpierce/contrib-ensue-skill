@@ -16,7 +16,7 @@ Persistent memory layer for AI agents. Store, recall, search, and share memories
 
 ## Setup
 
-1. Get an API key from [ensue.dev](https://ensue.dev)
+1. Get an API key from [ensue-network.ai/dashboard](https://www.ensue-network.ai/dashboard)
 
 2. Add the MCP server to Claude Code:
 ```bash

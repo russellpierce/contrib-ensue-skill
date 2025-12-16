@@ -19,7 +19,7 @@ If this returns a Bearer token in the headers, extract it and proceed.
 
 If not configured, notify the user:
 > "Ensue Memory Network is not configured. To set up:
-> 1. Get an API key from https://ensue.dev
+> 1. Get an API key from https://www.ensue-network.ai/dashboard
 > 2. Run: `claude mcp add memory-network-ensue https://api.ensue-network.ai/ --header \"Authorization: Bearer YOUR_API_KEY\"`"
 
 **Do not proceed until API key is available.**
