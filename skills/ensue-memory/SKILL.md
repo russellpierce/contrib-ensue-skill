@@ -5,7 +5,16 @@ description: Persistent memory layer for AI agents via Ensue Memory Network API.
 
 # Ensue Memory Network
 
-Dynamic memory service accessed via curl for fast CLI execution.
+Dynamic memory service accessed via curl.
+
+## IMPORTANT: Do NOT use native MCP tools
+
+**Do NOT use:**
+- `listMcpResources`
+- `mcp__ensue-memory-local__*` tools
+- Any native MCP tool calls
+
+**ONLY use curl** as described below. This ensures consistent behavior and dynamic schema discovery.
 
 ## Execution Order (MUST FOLLOW)
 
@@ -15,7 +24,7 @@ Dynamic memory service accessed via curl for fast CLI execution.
 claude mcp get memory-network-ensue
 ```
 
-If no Bearer token found, stop and notify user:
+Extract the Bearer token from the headers. If not found, stop and tell user:
 > "Ensue Memory Network is not configured. To set up:
 > 1. Get an API key from https://www.ensue-network.ai/dashboard
 > 2. Run: `claude mcp add memory-network-ensue https://api.ensue-network.ai/ --header \"Authorization: Bearer YOUR_API_KEY\"`"
@@ -29,7 +38,7 @@ curl -X POST https://api.ensue-network.ai/ \
   -d '{"jsonrpc":"2.0","method":"tools/list","id":1}'
 ```
 
-This returns current tool names, descriptions, and input schemas. **Never skip this step** - schemas may change.
+This returns tool names, descriptions, and input schemas. **Never skip this step.**
 
 **Step 3: Call the appropriate tool**
 
@@ -40,7 +49,7 @@ curl -X POST https://api.ensue-network.ai/ \
   -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"<tool_name>","arguments":{<args>}},"id":1}'
 ```
 
-Use the schema from Step 2 to construct the correct arguments.
+Use the schema from Step 2 to construct correct arguments.
 
 ## Intent Mapping
 
