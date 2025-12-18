@@ -136,23 +136,25 @@ done
 
 ### When users ask "what's on Ensue" / "show my memories" / "list keys"
 
-**Do NOT** call `list_keys`. Instead, go straight to semantic search:
+**Do NOT** call `list_keys` or guess a search query. Be interactive:
 
-1. **Ask what they're looking for:**
+1. **ALWAYS ask the user first** - never assume or invent a query:
    > "What would you like to find? I can search your memories by topic or meaning."
 
-2. **Use `discover_memories`** for semantic search with a **limit of 3**:
+2. **Wait for the user's response** before calling any search tool.
+
+3. **Only after the user specifies what they want**, use `discover_memories` with their query and **limit of 3**:
    ```bash
    curl -s -X POST https://api.ensue-network.ai/ \
      -H "Authorization: Bearer $ENSUE_API_KEY" \
      -H "Content-Type: application/json" \
-     -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"discover_memories","arguments":{"query":"<user intent>","limit":3}},"id":1}'
+     -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"discover_memories","arguments":{"query":"<USER'S ACTUAL QUERY>","limit":3}},"id":1}'
    ```
 
-3. **After showing results**, let the user know they can ask for more:
+4. **After showing results**, offer to continue:
    > "I found 3 results. Let me know if you'd like to see more or search for something else."
 
-4. **Only increase the limit** if the user explicitly requests more results.
+**CRITICAL: Never invent queries like "all memories" or "everything". You are a guide, not an assumer. Let the user drive the discovery.**
 
 ### Prefer semantic search over listing
 
@@ -172,7 +174,7 @@ done
 | "search for...", "find..." | discover_memories with limit 3 (offer to show more) |
 | "update...", "change..." | update_memory |
 | "delete...", "remove..." | delete_memory ⚠️ |
-| "list keys", "show memories", "what's on ensue" | Ask what they need, then discover_memories with limit 3 |
+| "list keys", "show memories", "what's on ensue" | **Ask user what to search for first**, then discover_memories with limit 3 |
 | "share with...", "give access..." | share |
 | "revoke access...", "remove user..." | revoke_share ⚠️ |
 | "who can access...", "permissions" | list_permissions |
