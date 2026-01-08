@@ -147,7 +147,7 @@ Use batch calls whenever possible to minimize API roundtrips and save tokens.
 
 ### Explicit vs Vague Requests
 
-**Explicit listing requests** → Execute directly with `list_keys` (limit 5):
+**Explicit listing requests** → Execute directly with `list_keys '{"limit": 5}'` (limit 5):
 - "list recent" / "list keys" / "show recent keys" / "list my memories"
 - User knows what they want - don't make them clarify
 - After displaying results, mention: "Ask for more if you'd like to see additional keys"
