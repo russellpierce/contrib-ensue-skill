@@ -111,7 +111,7 @@ Uses `$ENSUE_API_KEY` env var. If missing, user gets one at https://www.ensue-ne
 
 ## API Call
 
-Use the wrapper script for all API calls. It handles authentication and SSE response parsing:
+Use the wrapper script for all API calls. Set as executable before use. It handles authentication and SSE response parsing:
 
 ```bash
 ./scripts/ensue-api.sh <method> '<json_args>'
